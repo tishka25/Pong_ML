@@ -13,6 +13,9 @@
 		41DF13F72095BC27004F852A /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 41DF13F62095BC27004F852A /* nice_music.ogg */; };
 		41DF13F92095BC27004F852A /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41DF13F82095BC27004F852A /* sansation.ttf */; };
 		41DF13FB2095BC27004F852A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 41DF13FA2095BC27004F852A /* icon.png */; };
+		41DF14022095BE1F004F852A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DF14012095BE1F004F852A /* Player.cpp */; };
+		41DF14042095CE7E004F852A /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DF14032095CE7E004F852A /* Enemy.cpp */; };
+		41DF14062095E39B004F852A /* DNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DF14052095E39B004F852A /* DNA.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		41DF13F62095BC27004F852A /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
 		41DF13F82095BC27004F852A /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		41DF13FA2095BC27004F852A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		41DF14012095BE1F004F852A /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		41DF14032095CE7E004F852A /* Enemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		41DF14052095E39B004F852A /* DNA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DNA.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				41DF13EE2095BC27004F852A /* ResourcePath.mm */,
 				41DF13F02095BC27004F852A /* ResourcePath.hpp */,
 				41DF13F12095BC27004F852A /* main.cpp */,
+				41DF14012095BE1F004F852A /* Player.cpp */,
+				41DF14032095CE7E004F852A /* Enemy.cpp */,
+				41DF14052095E39B004F852A /* DNA.cpp */,
 				41DF13F32095BC27004F852A /* Resources */,
 				41DF13EC2095BC27004F852A /* Supporting Files */,
 			);
@@ -173,8 +182,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DF14042095CE7E004F852A /* Enemy.cpp in Sources */,
 				41DF13F22095BC27004F852A /* main.cpp in Sources */,
+				41DF14062095E39B004F852A /* DNA.cpp in Sources */,
 				41DF13EF2095BC27004F852A /* ResourcePath.mm in Sources */,
+				41DF14022095BE1F004F852A /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
