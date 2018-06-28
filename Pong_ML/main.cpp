@@ -1,65 +1,78 @@
+//
+//  main.cpp
+//  Pong_ML
+//
+//  Created by Teodor Stanishev on 4/29/18.
+//  Copyright © 2018 Teodor Stanishev. All rights reserved.
+//
 
-//
-// Disclaimer:
-// ----------
-//
-// This code will work only if you selected window, graphics and audio.
-//
-// Note that the "Run Script" build phase will copy the required frameworks
-// or dylibs to your application bundle so you can execute it on any OS X
-// computer.
-//
-// Your resource files (images, sounds, fonts, ...) are also copied to your
-// application bundle. To get the path to these resources, use the helper
-// function `resourcePath()` from ResourcePath.hpp
-//
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-
-// Here is a small helper for you! Have a look.
 #include "ResourcePath.hpp"
+#include <iostream>
+#include "Player.cpp"
+#include "Enemy.cpp"
+
+using namespace std;
+using namespace sf;
+
+static float WIDTH=800;
+static float HEIGHT=600;
+sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Pong AI");
+Player player(Vector2f(0 , HEIGHT/2) , Vector2f(10,100) , 10 , Color::Blue);
+Enemy enemy(Vector2f(WIDTH-10 , HEIGHT/2),Vector2f(10,100) ,10, Color::Green);
+CircleShape ball;
+
+Vector2f ballMove;
+vector<FloatRect>collisionPoints;
+
+
+
+void ballUpdate(){
+    if(ball.getPosition().y>HEIGHT || ball.getPosition().y<0)
+        ballMove.y=-ballMove.y;
+    window.draw(ball);
+}
+
+
+static void setup(){
+    window.setFramerateLimit(60);
+    window.setVerticalSyncEnabled(true);
+    
+    ballMove.x=2;
+    ballMove.y=2;
+    ball.setRadius(10);
+    ball.setPosition(WIDTH/2, HEIGHT/2);
+}
+
+
+
+static void loop(){
+    ball.move(ballMove);
+    enemy.update();
+    player.update();
+    
+    collisionPoints.push_back(FloatRect (player.getPosition().x,player.getPosition().y,player.getSize().x,player.getSize().y));
+    collisionPoints.push_back(FloatRect(enemy.getPosition().x,enemy.getPosition().y,enemy.getSize().x,enemy.getSize().y));
+    
+    for(auto collision : collisionPoints){
+        if(collision.contains(ball.getPosition().x+10,ball.getPosition().y) || collision.contains(ball.getPosition().x+ball.getRadius(),ball.getPosition().y))
+            ballMove.x=-ballMove.x;
+    }
+    
+    collisionPoints.clear();
+    ballUpdate();
+}
+
+
+
 
 int main(int, char const**)
 {
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-
-    // Set the Icon
-    sf::Image icon;
-    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
-        return EXIT_FAILURE;
-    }
-    sf::Sprite sprite(texture);
-
-    // Create a graphical text to display
-    sf::Font font;
-    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
-    }
-    sf::Text text("Hello SFML", font, 50);
-    text.setFillColor(sf::Color::Black);
-
-    // Load a music to play
-    sf::Music music;
-    if (!music.openFromFile(resourcePath() + "nice_music.ogg")) {
-        return EXIT_FAILURE;
-    }
-
-    // Play the music
-    music.play();
-
-    // Start the game loop
+    setup();
     while (window.isOpen())
     {
-        // Process events
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -77,11 +90,7 @@ int main(int, char const**)
         // Clear screen
         window.clear();
 
-        // Draw the sprite
-        window.draw(sprite);
-
-        // Draw the string
-        window.draw(text);
+        loop();
 
         // Update the window
         window.display();
